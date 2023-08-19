@@ -35,7 +35,7 @@ public class Book implements Serializable {
 	private String author;
 
 	@Column(nullable = false, precision = 4, columnDefinition = "SMALLINT")
-	private Integer year;
+	private Short year;
 
 	@Column(nullable = false, precision = 10, scale = 2)
 	private BigDecimal price;
