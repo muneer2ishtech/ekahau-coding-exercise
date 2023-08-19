@@ -39,25 +39,17 @@ public class UserDetailsImpl implements UserDetails {
 	@Setter(lombok.AccessLevel.PRIVATE)
 	private Collection<? extends GrantedAuthority> authorities;
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
+	@Getter
+	private boolean isAccountNonExpired = true;
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
+	@Getter
+	private boolean isAccountNonLocked = true;
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
+	@Getter
+	private boolean isCredentialsNonExpired = true;
 
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
+	@Getter
+	private boolean isEnabled = true;
 
 	public static UserDetails of(Long id, String username, String password) {
 		UserDetailsImpl userDetails = new UserDetailsImpl();
