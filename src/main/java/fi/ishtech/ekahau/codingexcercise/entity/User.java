@@ -33,17 +33,19 @@ public class User implements Serializable {
 
 	@Column(nullable = false, unique = true)
 	private String email;
-	
+
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@JsonIgnore
 	@Column(nullable = false, updatable = false)
 	private String passwordHash;
-	
+
+	@EqualsAndHashCode.Exclude
 	@Column(nullable = false)
 	private String firstName;
-	
+
+	@EqualsAndHashCode.Exclude
 	@Column(nullable = false)
 	private String lastName;
-	
+
 }
