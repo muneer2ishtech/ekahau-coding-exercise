@@ -2,6 +2,8 @@ package fi.ishtech.ekahau.codingexcercise.security.userdetails;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -32,6 +35,7 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Getter
 	@Setter(lombok.AccessLevel.PRIVATE)
+	@ToString.Exclude
 	@JsonIgnore
 	private String password;
 
@@ -61,6 +65,11 @@ public class UserDetailsImpl implements UserDetails {
 		userDetails.setAuthorities(Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
 
 		return userDetails;
+	}
+
+	@JsonIgnore
+	public List<String> getScopes() {
+		return getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
 	}
 
 }
