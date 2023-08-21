@@ -2,8 +2,6 @@ package fi.ishtech.ekahau.codingexcercise.payload;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.ToString;
@@ -18,7 +16,6 @@ public class SigninRequest implements Serializable {
 
 	@NotBlank
 	@ToString.Exclude
-	@JsonIgnore
 	private String password;
 
 }
