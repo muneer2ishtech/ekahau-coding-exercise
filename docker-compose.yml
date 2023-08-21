@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_ekahau
+    restart: always
+    environment:
+      POSTGRES_DB: ekdb
+      POSTGRES_USER: ekuser
+      POSTGRES_PASSWORD: q&6VP5fp
+    ports:
+       - 5432:5432
