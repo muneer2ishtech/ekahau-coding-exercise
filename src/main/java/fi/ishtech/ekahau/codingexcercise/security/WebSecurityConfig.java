@@ -58,7 +58,7 @@ public class WebSecurityConfig {
 		http.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(
-						auth -> auth.requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated());
+						auth -> auth.requestMatchers("/api/auth/**", "/error").permitAll().anyRequest().authenticated());
 
 		http.authenticationProvider(authenticationProvider());
 
