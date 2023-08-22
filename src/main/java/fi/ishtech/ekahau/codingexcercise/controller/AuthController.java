@@ -45,8 +45,7 @@ public class AuthController {
 	private UserRepo userRepo;
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody SigninRequest signinRequest) {
-
+	public ResponseEntity<?> signin(@Valid @RequestBody SigninRequest signinRequest) {
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(signinRequest.getUsername(), signinRequest.getPassword()));
 
