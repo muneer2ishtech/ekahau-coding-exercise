@@ -21,7 +21,7 @@ import fi.ishtech.ekahau.codingexcercise.exception.UsernameAlreadyExistsExceptio
 import fi.ishtech.ekahau.codingexcercise.payload.SigninRequest;
 import fi.ishtech.ekahau.codingexcercise.payload.SignupRequest;
 import fi.ishtech.ekahau.codingexcercise.repo.UserRepo;
-import fi.ishtech.ekahau.codingexcercise.security.JwtUtil;
+import fi.ishtech.ekahau.codingexcercise.security.jwt.JwtUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 

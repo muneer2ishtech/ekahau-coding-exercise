@@ -22,6 +22,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import fi.ishtech.ekahau.codingexcercise.security.jwt.JwtFilter;
 import fi.ishtech.ekahau.codingexcercise.security.userdetails.UserDetailsServiceImpl;
 
 /**

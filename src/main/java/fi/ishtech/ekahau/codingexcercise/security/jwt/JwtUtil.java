@@ -1,4 +1,4 @@
-package fi.ishtech.ekahau.codingexcercise.security;
+package fi.ishtech.ekahau.codingexcercise.security.jwt;
 
 import java.security.Key;
 import java.util.Date;
