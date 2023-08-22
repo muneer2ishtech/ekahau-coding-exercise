@@ -1,8 +1,6 @@
 package fi.ishtech.ekahau.codingexcercise.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
 
 import fi.ishtech.ekahau.codingexcercise.entity.User;
+import fi.ishtech.ekahau.codingexcercise.exception.UsernameAlreadyExistsException;
 import fi.ishtech.ekahau.codingexcercise.payload.SigninRequest;
 import fi.ishtech.ekahau.codingexcercise.payload.SignupRequest;
 import fi.ishtech.ekahau.codingexcercise.repo.UserRepo;
@@ -61,7 +59,7 @@ public class AuthController {
 	public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest signupRequest) {
 
 		if (userRepo.existsByEmail(signupRequest.getUsername())) {
-			throw HttpClientErrorException.create("Username is already in use", HttpStatus.BAD_REQUEST, null, null, null, null);
+			throw new UsernameAlreadyExistsException();
 		}
 
 		User user = new User();

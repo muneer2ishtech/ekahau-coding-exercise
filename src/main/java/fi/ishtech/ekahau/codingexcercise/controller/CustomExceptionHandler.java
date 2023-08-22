@@ -1,0 +1,26 @@
+package fi.ishtech.ekahau.codingexcercise.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import fi.ishtech.ekahau.codingexcercise.exception.UsernameAlreadyExistsException;
+
+/**
+ *
+ * @author Muneer Ahmed Syed
+ */
+@ControllerAdvice
+public class CustomExceptionHandler {
+
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(UsernameAlreadyExistsException.class)
+	public ResponseEntity<ErrorResponse> handleUsernameAlreadyExistsException(UsernameAlreadyExistsException ex) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body(ErrorResponse.create(ex, HttpStatus.BAD_REQUEST, ex.getMessage()));
+	}
+
+}
