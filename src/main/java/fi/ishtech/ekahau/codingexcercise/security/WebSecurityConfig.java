@@ -57,8 +57,8 @@ public class WebSecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(
-						auth -> auth.requestMatchers("/api/auth/**", "/error").permitAll().anyRequest().authenticated());
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**", "/error", "/", "/favicon.ico")
+						.permitAll().anyRequest().authenticated());
 
 		http.authenticationProvider(authenticationProvider());
 
