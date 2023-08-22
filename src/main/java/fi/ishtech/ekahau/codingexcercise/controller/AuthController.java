@@ -1,5 +1,7 @@
 package fi.ishtech.ekahau.codingexcercise.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import fi.ishtech.ekahau.codingexcercise.entity.User;
 import fi.ishtech.ekahau.codingexcercise.exception.UsernameAlreadyExistsException;
@@ -56,8 +59,10 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest signupRequest) {
+		log.debug("Signigup: {}", signupRequest.getUsername());
 
 		if (userRepo.existsByEmail(signupRequest.getUsername())) {
+			log.warn("Username: {} already exists", signupRequest.getUsername());
 			throw new UsernameAlreadyExistsException();
 		}
 
@@ -70,7 +75,11 @@ public class AuthController {
 		user = userRepo.save(user);
 		log.info("New User({} created for email: {}", user.getId(), user.getEmail());
 
-		return ResponseEntity.ok(user);
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/users/{userId}")
+				.buildAndExpand(user.getId()).toUri();
+
+		return ResponseEntity.created(uri).body(user.getId());
+
 	}
 
 }
