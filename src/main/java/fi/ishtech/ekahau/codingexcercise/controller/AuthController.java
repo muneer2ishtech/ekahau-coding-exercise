@@ -1,6 +1,8 @@
 package fi.ishtech.ekahau.codingexcercise.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,7 +41,7 @@ public class AuthController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private UserRepo userRepo;
 
@@ -56,18 +58,20 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest signupRequest) {
-		
-		userRepo.existsByEmail(signupRequest.getUsername());
-		
+
+		if (userRepo.existsByEmail(signupRequest.getUsername())) {
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
+
 		User user = new User();
 		user.setEmail(signupRequest.getUsername());
 		user.setPasswordHash(passwordEncoder.encode(signupRequest.getPassword()));
 		user.setFirstName(signupRequest.getFirstName());
 		user.setLastName(signupRequest.getLastName());
-		
+
 		user = userRepo.save(user);
 		log.info("New User({} created for email: {}", user.getId(), user.getEmail());
-		
+
 		return ResponseEntity.ok(user);
 	}
 
