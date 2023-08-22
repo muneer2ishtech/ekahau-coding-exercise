@@ -29,7 +29,7 @@ public class UserController {
 
 	@PreAuthorize(value = "hasAuthority('ROLE_USER')" + " and authentication.principal.id.equals(#id) ")
 	@GetMapping("/api/v1/users/{id}")
-	User findById(@PathVariable Long id) {
+	public User findById(@PathVariable Long id) {
 		return userRepo.findById(id).get();
 	}
 
