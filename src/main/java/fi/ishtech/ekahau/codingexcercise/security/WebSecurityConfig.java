@@ -10,7 +10,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -66,7 +65,7 @@ public class WebSecurityConfig {
 		// @formatter:off
  		http
  			.csrf(csrf -> csrf.disable())
- 			.cors(Customizer.withDefaults())
+ 			.cors(corsConfigSource -> corsConfigurationSource())
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(
 					auth -> auth
@@ -100,6 +99,7 @@ public class WebSecurityConfig {
 		corsConfig.applyPermitDefaultValues();
 		corsConfig.setAllowedMethods(
 				Arrays.stream(HttpMethod.values()).map(HttpMethod::name).collect(Collectors.toList()));
+
 		UrlBasedCorsConfigurationSource corsConfigSource = new UrlBasedCorsConfigurationSource();
 		corsConfigSource.registerCorsConfiguration("/**", corsConfig);
 
