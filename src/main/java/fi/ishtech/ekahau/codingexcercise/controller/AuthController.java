@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 
 import fi.ishtech.ekahau.codingexcercise.entity.User;
 import fi.ishtech.ekahau.codingexcercise.payload.SigninRequest;
@@ -60,7 +61,7 @@ public class AuthController {
 	public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest signupRequest) {
 
 		if (userRepo.existsByEmail(signupRequest.getUsername())) {
-			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+			throw HttpClientErrorException.create("Username is already in use", HttpStatus.BAD_REQUEST, null, null, null, null);
 		}
 
 		User user = new User();
