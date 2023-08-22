@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  db:
+  postgres-db:
     image: postgres:15
-    container_name: postgres_ekahau
+    container_name: postgres_ekahau_coding_excercise
     restart: always
     environment:
       POSTGRES_DB: ekdb
@@ -11,3 +11,15 @@ services:
       POSTGRES_PASSWORD: q&6VP5fp
     ports:
        - 5432:5432
+
+  spring-boot-app:
+    container_name: springboot_ekahau_coding_excercise
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+       - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_ekahau_coding_excercise:5432/ekdb
+    depends_on:
+      - postgres-db
