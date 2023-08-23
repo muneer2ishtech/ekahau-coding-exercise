@@ -71,7 +71,8 @@ public class WebSecurityConfig {
 			.authorizeHttpRequests(
 					auth -> auth
 						.requestMatchers(
-								"/api/auth/**",
+								"/api/auth/signup",
+								"/api/auth/signin",
 								"/error",
 								"/",
 								"/favicon.ico"
