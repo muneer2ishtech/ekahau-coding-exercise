@@ -3,8 +3,10 @@ package fi.ishtech.ekahau.codingexcercise.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import fi.ishtech.ekahau.codingexcercise.entity.User;
+import fi.ishtech.ekahau.codingexcercise.payload.PasswordUpdateRequest;
 import fi.ishtech.ekahau.codingexcercise.payload.SignupRequest;
 import fi.ishtech.ekahau.codingexcercise.repo.UserRepo;
 import fi.ishtech.ekahau.codingexcercise.service.UserService;
@@ -57,6 +59,18 @@ public class UserServiceImpl implements UserService {
 		log.info("Updated User({})", user.getId());
 
 		return user;
+	}
+
+	@Override
+	public void updatePassword(Long userId, PasswordUpdateRequest passwordUpdateRequest) {
+		String exPasswordHash = findById(userId).getPasswordHash();
+		Assert.isTrue(passwordEncoder.matches(passwordUpdateRequest.getOldPassword(), exPasswordHash),
+				"Invalid old password");
+
+		String newPasswordHash = passwordEncoder.encode(passwordUpdateRequest.getNewPassword());
+
+		userRepo.updatePassword(userId, newPasswordHash);
+		log.info("Updated password for User({})", userId);
 	}
 
 }

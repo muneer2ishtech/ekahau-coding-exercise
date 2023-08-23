@@ -16,16 +16,20 @@ public class PasswordUpdateRequest implements Serializable {
 
 	@NotBlank
 	@ToString.Exclude
-	private String password;
+	private String oldPassword;
 
 	@NotBlank
 	@ToString.Exclude
-	private String passwordRepeat;
+	private String newPassword;
 
-	@AssertTrue(message = "password and passwordRepeat are not matching")
+	@NotBlank
+	@ToString.Exclude
+	private String newPasswordRepeat;
+
+	@AssertTrue(message = "newPassword and newPasswordRepeat are not matching")
 	@JsonIgnore
 	public boolean isPasswordAndPasswordRepeatMatch() {
-		return password.equals(passwordRepeat);
+		return newPassword.equals(newPasswordRepeat);
 	}
 
 }
