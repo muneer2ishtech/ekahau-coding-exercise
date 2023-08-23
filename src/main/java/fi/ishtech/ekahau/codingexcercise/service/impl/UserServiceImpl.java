@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updatePassword(Long userId, PasswordUpdateRequest passwordUpdateRequest) {
-		String exPasswordHash = findById(userId).getPasswordHash();
+		String exPasswordHash = userRepo.findPasswordHashById(userId);
 		Assert.isTrue(passwordEncoder.matches(passwordUpdateRequest.getOldPassword(), exPasswordHash),
 				"Invalid old password");
 

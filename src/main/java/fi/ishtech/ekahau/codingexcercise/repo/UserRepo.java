@@ -18,6 +18,9 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
 	Optional<User> findOneByEmail(String email);
 
+	@Query("SELECT u.passwordHash FROM User u WHERE u.id = :userId")
+	String findPasswordHashById(Long userId);
+
 	@Modifying
 	@Query("UPDATE User u SET u.passwordHash = :newPassword WHERE u.id = :userId")
 	void updatePassword(Long userId, String newPassword);
