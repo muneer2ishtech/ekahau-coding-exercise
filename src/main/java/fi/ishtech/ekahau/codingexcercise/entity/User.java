@@ -31,7 +31,7 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, updatable = false, unique = true)
 	private String email;
 
 	@EqualsAndHashCode.Exclude
