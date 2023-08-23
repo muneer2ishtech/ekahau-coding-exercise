@@ -32,4 +32,10 @@ public class PasswordUpdateRequest implements Serializable {
 		return newPassword.equals(newPasswordRepeat);
 	}
 
+	@AssertTrue(message = "newPassword cannot be same as oldPassword")
+	@JsonIgnore
+	public boolean isNewPasswordAndOldPasswordMatch() {
+		return !newPassword.equals(oldPassword);
+	}
+
 }
