@@ -4,12 +4,14 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import fi.ishtech.ekahau.codingexcercise.entity.User;
 import fi.ishtech.ekahau.codingexcercise.exception.UsernameAlreadyExistsException;
+import fi.ishtech.ekahau.codingexcercise.payload.PasswordUpdateRequest;
 import fi.ishtech.ekahau.codingexcercise.payload.SigninRequest;
 import fi.ishtech.ekahau.codingexcercise.payload.SignupRequest;
 import fi.ishtech.ekahau.codingexcercise.repo.UserRepo;
@@ -79,7 +82,21 @@ public class AuthController {
 				.buildAndExpand(user.getId()).toUri();
 
 		return ResponseEntity.created(uri).body(user.getId());
+	}
 
+	@PreAuthorize(value = "hasAuthority('ROLE_USER')")
+	@PatchMapping("/update-password")
+	public ResponseEntity<Void> update(@Valid @RequestBody PasswordUpdateRequest passwordUpdateRequest) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Long userId = jwtUtil.getUserId(authentication);
+		log.debug("Updating password for {}", userId);
+
+		String newPassword = passwordEncoder.encode(passwordUpdateRequest.getPassword());
+		
+		userRepo.updatePassword(userId, newPassword);
+		log.info("Updated password for User({})", userId);
+
+		return ResponseEntity.ok(null);
 	}
 
 }
