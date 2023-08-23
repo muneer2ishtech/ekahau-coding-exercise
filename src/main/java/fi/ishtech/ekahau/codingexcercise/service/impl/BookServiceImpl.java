@@ -45,17 +45,18 @@ public class BookServiceImpl implements BookService {
 		Assert.isNull(book.getId(), "Cannot set id for new Book");
 		Assert.hasText(book.getTitle(), "Title is mandatory");
 
-		book = bookRepo.save(book);
+		book = bookRepo.saveAndFlush(book);
 		log.info("New Book({}) created for title: {}", book.getId(), book.getTitle());
 
 		return book;
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public Book update(Book book) {
 		Assert.notNull(book.getId(), "Book id is mandatory to find and update details");
 
-		book = bookRepo.save(book);
+		book = bookRepo.saveAndFlush(book);
 		entityManager.refresh(book);
 		log.info("Updated Book({})", book.getId());
 
