@@ -1,8 +1,7 @@
 package fi.ishtech.ekahau.codingexcercise.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fi.ishtech.ekahau.codingexcercise.entity.User;
-import fi.ishtech.ekahau.codingexcercise.repo.UserRepo;
 import fi.ishtech.ekahau.codingexcercise.security.jwt.JwtUtil;
+import fi.ishtech.ekahau.codingexcercise.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 
 	@Autowired
-	private UserRepo userRepo;
+	private UserService userService;
 
 	@Autowired
 	private JwtUtil jwtUtil;
@@ -43,7 +42,7 @@ public class UserController {
 	@PreAuthorize(value = "hasAuthority('ROLE_USER')" + " and authentication.principal.id.equals(#id) ")
 	@GetMapping("/api/v1/users/{id}")
 	public User findById(@PathVariable Long id) {
-		return userRepo.findById(id).get();
+		return userService.findById(id);
 	}
 
 	@PreAuthorize(value = "hasAuthority('ROLE_USER')")
@@ -60,10 +59,7 @@ public class UserController {
 				"Cannot update username/email");
 		Assert.isTrue(!StringUtils.hasText(user.getPasswordHash()), "Cannot update password using this API");
 
-		user = userRepo.save(user);
-		// you have a service class with Transactional and refresh entity to get all
-		// data
-		log.info("Updated User({})", user.getId());
+		user = userService.update(user);
 
 		return ResponseEntity.ok(user);
 	}
