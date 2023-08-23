@@ -88,4 +88,17 @@ public class JwtUtil {
 		return JwtResponse.of(issuer, jwt, userDetails.getUsername(), userDetails.getScopes(), iat.getTime(),
 				exp.getTime());
 	}
+
+	public UserDetailsImpl getUserDetails(Authentication authentication) {
+		return (UserDetailsImpl) authentication.getPrincipal();
+	}
+
+	public Long getUserId(Authentication authentication) {
+		return getUserDetails(authentication).getId();
+	}
+
+	public String getUsername(Authentication authentication) {
+		return getUserDetails(authentication).getUsername();
+	}
+
 }
