@@ -5,13 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import fi.ishtech.ekahau.codingexcercise.entity.Book;
 import fi.ishtech.ekahau.codingexcercise.repo.BookRepo;
 import fi.ishtech.ekahau.codingexcercise.service.BookService;
 import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 /**
