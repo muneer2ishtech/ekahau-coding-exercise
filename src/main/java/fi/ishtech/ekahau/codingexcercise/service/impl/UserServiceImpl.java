@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User update(User user) {
-		user = userRepo.save(user);
+		user = userRepo.saveAndFlush(user);
 		entityManager.refresh(user);
 
 		log.info("Updated User({})", user.getId());
