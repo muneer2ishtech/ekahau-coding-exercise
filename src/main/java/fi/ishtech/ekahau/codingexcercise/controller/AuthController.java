@@ -25,6 +25,7 @@ import fi.ishtech.ekahau.codingexcercise.payload.SigninRequest;
 import fi.ishtech.ekahau.codingexcercise.payload.SignupRequest;
 import fi.ishtech.ekahau.codingexcercise.repo.UserRepo;
 import fi.ishtech.ekahau.codingexcercise.security.jwt.JwtUtil;
+import fi.ishtech.ekahau.codingexcercise.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,6 +51,9 @@ public class AuthController {
 	@Autowired
 	private UserRepo userRepo;
 
+	@Autowired
+	private UserService userService;
+
 	@PostMapping("/signin")
 	public ResponseEntity<?> signin(@Valid @RequestBody SigninRequest signinRequest) {
 		Authentication authentication = authenticationManager.authenticate(
@@ -69,14 +73,7 @@ public class AuthController {
 			throw new UsernameAlreadyExistsException();
 		}
 
-		User user = new User();
-		user.setEmail(signupRequest.getUsername());
-		user.setPasswordHash(passwordEncoder.encode(signupRequest.getPassword()));
-		user.setFirstName(signupRequest.getFirstName());
-		user.setLastName(signupRequest.getLastName());
-
-		user = userRepo.save(user);
-		log.info("New User({} created for email: {}", user.getId(), user.getEmail());
+		User user = userService.create(signupRequest);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/users/{userId}")
 				.buildAndExpand(user.getId()).toUri();

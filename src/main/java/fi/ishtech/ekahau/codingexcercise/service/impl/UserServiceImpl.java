@@ -1,9 +1,11 @@
 package fi.ishtech.ekahau.codingexcercise.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fi.ishtech.ekahau.codingexcercise.entity.User;
+import fi.ishtech.ekahau.codingexcercise.payload.SignupRequest;
 import fi.ishtech.ekahau.codingexcercise.repo.UserRepo;
 import fi.ishtech.ekahau.codingexcercise.service.UserService;
 import jakarta.persistence.EntityManager;
@@ -25,9 +27,26 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private EntityManager entityManager;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Override
 	public User findById(Long id) {
 		return userRepo.findById(id).orElse(null);
+	}
+
+	@Override
+	public User create(SignupRequest signupRequest) {
+		User user = new User();
+		user.setEmail(signupRequest.getUsername());
+		user.setPasswordHash(passwordEncoder.encode(signupRequest.getPassword()));
+		user.setFirstName(signupRequest.getFirstName());
+		user.setLastName(signupRequest.getLastName());
+
+		user = userRepo.saveAndFlush(user);
+		log.info("New User({} created for email: {}", user.getId(), user.getEmail());
+
+		return user;
 	}
 
 	@Override
