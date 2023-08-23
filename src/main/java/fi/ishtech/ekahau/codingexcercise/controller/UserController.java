@@ -36,9 +36,8 @@ public class UserController {
 	private JwtUtil jwtUtil;
 
 	@GetMapping("/api/v1/users")
-	public List<User> findAll() {
-		return userRepo.findAll();
-
+	public ResponseEntity<Void> findAll() {
+		return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 	}
 
 	@PreAuthorize(value = "hasAuthority('ROLE_USER')" + " and authentication.principal.id.equals(#id) ")
