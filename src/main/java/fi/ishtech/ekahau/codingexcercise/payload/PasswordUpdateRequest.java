@@ -28,7 +28,7 @@ public class PasswordUpdateRequest implements Serializable {
 
 	@AssertTrue(message = "newPassword and newPasswordRepeat are not matching")
 	@JsonIgnore
-	public boolean isPasswordAndPasswordRepeatMatch() {
+	public boolean isNewPasswordAndNewPasswordRepeatMatch() {
 		return newPassword.equals(newPasswordRepeat);
 	}
 
