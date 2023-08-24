@@ -94,4 +94,45 @@ public class BookControllerTest {
 		// @formatter:on
 	}
 
+	@Test
+	@Order(5)
+	@WithMockUser(username = "junit@ishtech.fi", password = "Test#123", authorities = "ROLE_USER")
+	public void testCreateNewBookFailForMissingData() throws Exception {
+		Book book = new Book();
+		book.setAuthor("Muneer");
+		book.setYear(Short.valueOf("2023"));
+		book.setPrice(new BigDecimal("12.34"));
+
+		Gson gson = new Gson();
+		String requestJson = gson.toJson(book);
+
+		// @formatter:off
+ 		mvc.perform(post("/api/v1/books")
+ 				.contentType(MediaType.APPLICATION_JSON)
+ 				.content(requestJson))
+ 			.andExpect(status().isBadRequest());
+		// @formatter:on
+	}
+
+	@Test
+	@Order(6)
+	@WithMockUser(username = "junit@ishtech.fi", password = "Test#123", authorities = "ROLE_USER")
+	public void testCreateNewBookFailForNonUniqueTitle() throws Exception {
+		Book book = new Book();
+		book.setTitle("Intro to Java");
+		book.setAuthor("Muneer");
+		book.setYear(Short.valueOf("2023"));
+		book.setPrice(new BigDecimal("12.34"));
+
+		Gson gson = new Gson();
+		String requestJson = gson.toJson(book);
+
+		// @formatter:off
+ 		mvc.perform(post("/api/v1/books")
+ 				.contentType(MediaType.APPLICATION_JSON)
+ 				.content(requestJson))
+ 			.andExpect(status().isInternalServerError());
+		// @formatter:on
+	}
+
 }
