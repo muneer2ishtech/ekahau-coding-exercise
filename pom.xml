@@ -12,7 +12,7 @@
 
 	<groupId>fi.ishtech.ekahau</groupId>
 	<artifactId>coding-excercise</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 
 	<name>coding-excercise</name>
 	<description>Coding Excercise by Ekahu using Spring Boot</description>
