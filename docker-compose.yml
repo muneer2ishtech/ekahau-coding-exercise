@@ -13,6 +13,7 @@ services:
        - 5432:5432
 
   spring-boot-app:
+    image: muneer2ishtech/springboot_ekahau_coding_excercise:0.2.0-SNAPSHOT
     container_name: springboot_ekahau_coding_excercise
     build:
       context: .
