@@ -132,7 +132,7 @@ public class BookControllerTest {
  		mvc.perform(post("/api/v1/books")
  				.contentType(MediaType.APPLICATION_JSON)
  				.content(requestJson))
- 			.andExpect(status().isInternalServerError());
+ 			.andExpect(status().isBadRequest());
 		// @formatter:on
 	}
 
