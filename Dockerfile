@@ -6,10 +6,9 @@ ENV POSTGRES_PASSWORD: q&6VP5fp
 
 EXPOSE 5432
 
-RUN ["postgres"]
+FROM openjdk:17
 
-RUN apt-get update -y
-RUN apt-get install -y openjdk-17-jdk
+VOLUME /tmp
 
 EXPOSE 8080
 
