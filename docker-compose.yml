@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres-db:
     image: postgres:15
-    container_name: postgres_ekahau_coding_excercise
+    container_name: ekahau_coding_excercise_postgres
     restart: always
     environment:
       POSTGRES_DB: ekdb
@@ -13,14 +13,14 @@ services:
        - 5432:5432
 
   spring-boot-app:
-    image: muneer2ishtech/springboot_ekahau_coding_excercise:0.2.0-SNAPSHOT
-    container_name: springboot_ekahau_coding_excercise
+    image: muneer2ishtech/ekahau_coding_excercise_springboot:0.2.0-SNAPSHOT
+    container_name: ekahau_coding_excercise_springboot
     build:
       context: .
       dockerfile: Dockerfile
     ports:
        - 8080:8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_ekahau_coding_excercise:5432/ekdb
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ekahau_coding_excercise_postgres:5432/ekdb
     depends_on:
       - postgres-db
