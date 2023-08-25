@@ -28,3 +28,6 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile muneer2ishtech/springboot_ekahau_coding_excercise:0.2.0-SNAPSHOT
+
