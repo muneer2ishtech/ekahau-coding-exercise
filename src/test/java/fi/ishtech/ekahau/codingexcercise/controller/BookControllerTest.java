@@ -3,6 +3,7 @@ package fi.ishtech.ekahau.codingexcercise.controller;
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -54,7 +55,7 @@ public class BookControllerTest {
  		mvc.perform(post("/api/v1/books")
  				.contentType(MediaType.APPLICATION_JSON)
  				.content(requestJson))
- 			.andExpect(status().is2xxSuccessful());
+ 			.andExpect(status().isCreated());
 		// @formatter:on
 	}
 
