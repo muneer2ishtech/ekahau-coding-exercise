@@ -135,4 +135,47 @@ public class BookControllerTest {
 		// @formatter:on
 	}
 
+	@Test
+	@Order(7)
+	@WithMockUser(username = "junit@ishtech.fi", password = "Test#123", authorities = "ROLE_USER")
+	public void testUpdateBookOk() throws Exception {
+		Book book = new Book();
+		book.setId(1L);
+		book.setTitle("Intro to Java");
+		book.setAuthor("Muneer");
+		book.setYear(Short.valueOf("2023"));
+		book.setPrice(new BigDecimal("56.78"));
+
+		Gson gson = new Gson();
+		String requestJson = gson.toJson(book);
+
+		// @formatter:off
+ 		mvc.perform(put("/api/v1/books")
+ 				.contentType(MediaType.APPLICATION_JSON)
+ 				.content(requestJson))
+ 			.andExpect(status().isOk());
+		// @formatter:on
+	}
+
+	@Test
+	@Order(8)
+	@WithMockUser(username = "junit@ishtech.fi", password = "Test#123", authorities = "ROLE_USER")
+	public void testUpdateBookFailForMissingId() throws Exception {
+		Book book = new Book();
+		book.setTitle("Intro to Java");
+		book.setAuthor("Muneer");
+		book.setYear(Short.valueOf("2023"));
+		book.setPrice(new BigDecimal("56.78"));
+
+		Gson gson = new Gson();
+		String requestJson = gson.toJson(book);
+
+		// @formatter:off
+ 		mvc.perform(put("/api/v1/books")
+ 				.contentType(MediaType.APPLICATION_JSON)
+ 				.content(requestJson))
+ 			.andExpect(status().isBadRequest());
+		// @formatter:on
+	}
+
 }
