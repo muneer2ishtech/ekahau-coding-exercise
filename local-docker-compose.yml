@@ -13,8 +13,8 @@ services:
        - 5432:5432
 
   spring-boot-app:
-    image: muneer2ishtech/ekahau_coding_exercise_springboot:0.2.0-SNAPSHOT
-    container_name: ekahau_coding_exercise_springboot
+    image: muneer2ishtech/ekahau_coding_exercise_springboot:local
+    container_name: ekahau_coding_exercise_springboot_local
     build:
       context: .
       dockerfile: Local.Dockerfile
