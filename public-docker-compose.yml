@@ -15,9 +15,6 @@ services:
   spring-boot-app:
     image: muneer2ishtech/ekahau_coding_exercise_springboot:0.2.0
     container_name: ekahau_coding_exercise_springboot
-    build:
-      context: .
-      dockerfile: Dockerfile
     ports:
        - 8080:8080
     environment:
