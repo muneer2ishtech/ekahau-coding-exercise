@@ -75,6 +75,9 @@ public class WebSecurityConfig {
 								"/api/auth/signin",
 								"/error",
 								"/",
+								"/api-docs/**",
+								"/swagger-ui/**",
+								"/swagger-ui.html",
 								"/favicon.ico"
 						)
 							.permitAll()
