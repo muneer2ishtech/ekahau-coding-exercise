@@ -29,5 +29,5 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag muneer2ishtech/ekahau_coding_exercise_springboot:0.3.0-SNAPSHOT
+      run: docker build . --file Dockerfile --tag muneer2ishtech/ekahau_coding_exercise_springboot:0.3.0
 
