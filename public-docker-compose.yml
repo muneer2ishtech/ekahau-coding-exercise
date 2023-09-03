@@ -13,7 +13,7 @@ services:
        - 5432:5432
 
   spring-boot-app:
-    image: muneer2ishtech/ekahau_coding_exercise_springboot:0.2.0
+    image: muneer2ishtech/ekahau_coding_exercise_springboot:0.3.0-SNAPSHOT
     container_name: ekahau_coding_exercise_springboot
     ports:
        - 8080:8080
