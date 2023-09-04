@@ -12,6 +12,9 @@ import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.Assert;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @SpringBootApplication
 public class CodingExerciseApplication {
 
@@ -41,9 +44,14 @@ public class CodingExerciseApplication {
 	}
 
 	private Connector[] additionalConnectors() {
+		log.info("addtionalPorts:{}", this.additionalPorts);
+
 		if (this.additionalPorts) {
 			Assert.state(this.userPort != null, "Port for '**/users/**' canot be null");
 			Assert.state(this.bookPort != null, "Port for '**/books/**' canot be null");
+
+			log.info("PORT for **/users/**:{}", this.userPort);
+			log.info("PORT for **/books/**:{}", this.bookPort);
 		} else {
 			return null;
 		}
