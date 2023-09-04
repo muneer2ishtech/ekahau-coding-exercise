@@ -15,6 +15,11 @@ mvn clean package
 docker build -f Dockerfile . -t muneer2ishtech/ekahau_coding_exercise_springboot:0.4.0
 ```
 
+#### Docker build multiple tags
+```
+docker build -f Dockerfile . -t muneer2ishtech/ekahau_coding_exercise_springboot:0.4.0 -t muneer2ishtech/ekahau_coding_exercise_springboot:latest
+```
+
 ## Local Run
 ### Run using Maven
 - Without additional ports
@@ -50,6 +55,11 @@ docker compose -f docker-compose.yml up
 ```
 docker compose -f docker-compose.yml push
 
+```
+
+#### To push all tags to Docker Hub
+```
+docker image push --all-tags muneer2ishtech/ekahau_coding_exercise_springboot
 ```
 
 ### Pull from Docker Hub
