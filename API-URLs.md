@@ -4,8 +4,9 @@
 
 ### Additional Ports
 - If application property `fi.istech.ekahau.additional-ports` or environment variable `FI_ISTECH_EKAHAU_ADDITIONAL-PORTS` is set to `true`
-  - PORT for `**/users/**` is `8082`
-  - PORT for `**/books/**` is `8081`
+    - PORT for `**/users/**` is `8082`
+    - PORT for `**/books/**` is `8081`
+- By default additional-ports is set to `false`, i.e. all API URLs use only `8080` port
 
 
 
