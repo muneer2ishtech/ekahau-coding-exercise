@@ -17,7 +17,7 @@ docker build -f Dockerfile . -t muneer2ishtech/ekahau_coding_exercise_springboot
 
 #### Docker build multiple tags
 ```
-docker build -f Dockerfile . -t muneer2ishtech/ekahau_coding_exercise_springboot:0.4.0 -t muneer2ishtech/ekahau_coding_exercise_springboot:latest
+docker build -f Dockerfile . -t muneer2ishtech/ekahau_coding_exercise_springboot:0.5.0-SNAPSHOT -t muneer2ishtech/ekahau_coding_exercise_springboot:latest
 ```
 
 ## Local Run
