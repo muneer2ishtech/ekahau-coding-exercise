@@ -3,7 +3,7 @@
 See [How-to](./HOW-TO.md) on how to make maven, docker builds and push & pull images to Docker Hub
 
 ### Docker Image pulled from Docker Hub
-- [How to run Docker Image pulled from Docker Hub](./HOW-TO.md#Run Docker Image pulled from Docker Hub) without making any builds locally
+- [How to run Docker Image pulled from Docker Hub](./HOW-TO.md#to-run-with-additional-port-for-image-pulled-from-docker-hub) without making any builds locally
 
 # Ports
 
