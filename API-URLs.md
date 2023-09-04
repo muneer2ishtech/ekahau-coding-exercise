@@ -1,3 +1,16 @@
+# Ports
+
+- Default port: 8080
+
+### Additional Ports
+- If application property `fi.istech.ekahau.additional-ports` or environment variable `FI_ISTECH_EKAHAU_ADDITIONAL-PORTS` is set to `true`
+  - PORT for `**/users/**` is `8082`
+  - PORT for `**/books/**` is `8081`
+
+
+
+## 
+
 # APIs
 
 ## APIs for Auth
@@ -316,13 +329,3 @@ Http Reponse code <code>404 - NOT_FOUND</code> - If no book exists by given id
 <br>
 <br>
 <br>
-
-# Ports
-
-- Default port: 8080
-
-### Additional Ports
-- If application property `fi.istech.ekahau.additional-ports` or environment variable `FI_ISTECH_EKAHAU_ADDITIONAL-PORTS` is set to `true`
-
-
-## 
