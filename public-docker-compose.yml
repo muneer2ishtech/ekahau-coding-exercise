@@ -17,6 +17,8 @@ services:
     container_name: ekahau_coding_exercise_springboot
     ports:
        - 8080:8080
+       - 8081:8081
+       - 8082:8082
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://ekahau_coding_exercise_postgres:5432/ekdb
       - FI_ISTECH_EKAHAU_ADDITIONAL-PORTS=false
