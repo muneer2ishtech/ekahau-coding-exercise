@@ -54,7 +54,7 @@ public class CodingExerciseApplication {
 		connector1.setScheme("http");
 		connector1.setPort(this.userPort);
 		connectors.add(connector1);
-		
+
 		Connector connector2 = new Connector("org.apache.coyote.http11.Http11NioProtocol");
 		connector2.setScheme("http");
 		connector2.setPort(this.bookPort);
