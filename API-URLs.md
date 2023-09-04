@@ -27,8 +27,8 @@
 |Book   |Get Book by ID      |GET    |localhost:PORT/api/v1/books/{bookId}    |
 |Book   |Delete Book By ID   |DELETE |localhost:PORT/api/v1/books/{bookId}    |
 |       |                    |       |                                        |
-|API Doc| OpenAPI            | GET   |http://localhost:8080/api-docs          |
-|API Doc| Swagger            | GET   |http://localhost:8080/swagger-ui.html   |
+|API Doc| OpenAPI            | GET   |localhost:8080/api-docs                 |
+|API Doc| Swagger            | GET   |localhost:8080/swagger-ui.html          |
 
 
 # API Details 
