@@ -43,10 +43,12 @@ public class PortFilter implements Filter {
 
 		if (this.additionalPorts) {
 			if (StringUtils.containsIgnoreCase(req.getRequestURI(), "/books")) {
-				Assert.isTrue(this.bookPort != req.getLocalPort(), "Invalid Port");
+				Assert.isTrue(this.bookPort != req.getLocalPort(),
+						"Invalid Port " + req.getLocalPort() + ", use " + this.bookPort);
 			}
 			if (StringUtils.containsIgnoreCase(req.getRequestURI(), "/users")) {
-				Assert.isTrue(this.userPort != req.getLocalPort(), "Invalid Port");
+				Assert.isTrue(this.userPort != req.getLocalPort(),
+						"Invalid Port " + req.getLocalPort() + ", use " + this.userPort);
 			}
 		}
 
