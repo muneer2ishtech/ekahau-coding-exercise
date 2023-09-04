@@ -286,13 +286,13 @@ Sample Response JSON
 
 ```json
 [
-	{
-		"id": 1,
-		"title": "Postgre Fundamentals - New Edition",
-		"author": "Ahmed",
-		"year": 2023,
-		"price": 12.35
-	},
+    {
+        "id": 1,
+        "title": "Postgre Fundamentals - New Edition",
+        "author": "Ahmed",
+        "year": 2023,
+        "price": 12.35
+    },
     {
         "id": 1,
         "title": "Java Intro",
@@ -315,7 +315,7 @@ Sample Response JSON
 </tr>
 <tr>
 <td style="vertical-align:text-top">
-Request Param: <code>userId</code>
+Request Param: <code>bookId</code>
 </td>
 <td style="vertical-align:text-top">
 Sample Response JSON
@@ -344,7 +344,7 @@ Http Reponse code <code>404 - NOT_FOUND</code> - If no book exists by given id
 </tr>
 <tr>
 <td style="vertical-align:text-top">
-Request Param: <code>userId</code>
+Request Param: <code>bookId</code>
 </td>
 <td style="vertical-align:text-top">
 Http Reponse code <code>410 - GONE</code>  - for successfully deleting book in DB<br><br>
