@@ -1,3 +1,10 @@
+
+## How to
+See [How-to](HOW-To.md) on how to make maven, docker builds and push & pull images to Docker Hub
+
+### Docker Image pulled from Docker Hub
+- [How to run Docker Image pulled from Docker Hub](./HOW-TO.md#Run Docker Image pulled from Docker Hub) without making any builds locally
+
 # Ports
 
 - Default port: 8080
