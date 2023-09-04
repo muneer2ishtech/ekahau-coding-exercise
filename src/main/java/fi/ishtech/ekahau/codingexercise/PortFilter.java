@@ -43,11 +43,15 @@ public class PortFilter implements Filter {
 		log.debug("PORT:{}, URI:{}", req.getLocalPort(), req.getRequestURI());
 
 		if (this.additionalPorts) {
-			if (this.userPort == req.getLocalPort() && StringUtils.containsIgnoreCase(req.getRequestURI(), "/books")) {
-				res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Port");
+			if (StringUtils.containsIgnoreCase(req.getRequestURI(), "/books")) {
+				if (this.bookPort != req.getLocalPort()) {
+					res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Port");
+				}
 			}
-			if (this.bookPort == req.getLocalPort() && StringUtils.containsIgnoreCase(req.getRequestURI(), "/users")) {
-				res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Port");
+			if (StringUtils.containsIgnoreCase(req.getRequestURI(), "/users")) {
+				if (this.userPort != req.getLocalPort()) {
+					res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Port");
+				}
 			}
 		}
 
