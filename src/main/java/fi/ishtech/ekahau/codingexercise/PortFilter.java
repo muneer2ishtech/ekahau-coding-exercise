@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -13,7 +14,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -38,20 +38,15 @@ public class PortFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain fc)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse res = (HttpServletResponse) response;
 
 		log.debug("PORT:{}, URI:{}", req.getLocalPort(), req.getRequestURI());
 
 		if (this.additionalPorts) {
 			if (StringUtils.containsIgnoreCase(req.getRequestURI(), "/books")) {
-				if (this.bookPort != req.getLocalPort()) {
-					res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Port");
-				}
+				Assert.isTrue(this.bookPort != req.getLocalPort(), "Invalid Port");
 			}
 			if (StringUtils.containsIgnoreCase(req.getRequestURI(), "/users")) {
-				if (this.userPort != req.getLocalPort()) {
-					res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Port");
-				}
+				Assert.isTrue(this.userPort != req.getLocalPort(), "Invalid Port");
 			}
 		}
 
