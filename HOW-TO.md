@@ -12,7 +12,7 @@ mvn clean package
 
 ### Docker build
 ```
-docker build -f Dockerfile . -t muneer2ishtech/ekahau_coding_exercise_springboot:0.4.0-SNAPSHOT
+docker build -f Dockerfile . -t muneer2ishtech/ekahau_coding_exercise_springboot:0.4.0
 ```
 
 ## Local Run
@@ -31,7 +31,7 @@ mvn spring-boot:run -Dspring-boot.run.arguments="--fi.istech.ekahau.additional-p
 
 ### Run using already built Docker image
 ```
-docker run -it muneer2ishtech/ekahau_coding_exercise_springboot:0.4.0-SNAPSHOT
+docker run -it muneer2ishtech/ekahau_coding_exercise_springboot:0.4.0
 ```
 
 ### Run using Docker composer
@@ -54,7 +54,7 @@ docker compose -f docker-compose.yml push
 
 ### Pull from Docker Hub
 ```
-docker pull muneer2ishtech/ekahau_coding_exercise_springboot:0.4.0-SNAPSHOT
+docker pull muneer2ishtech/ekahau_coding_exercise_springboot:0.4.0
 ```
 
 ## Run Docker Image pulled from Docker Hub
