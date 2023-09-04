@@ -19,13 +19,13 @@ public class CodingExerciseApplication {
 		SpringApplication.run(CodingExerciseApplication.class, args);
 	}
 
-	@Value("${server.additional-ports:false}")
+	@Value("${fi.istech.ekahau.additional-ports:false}")
 	private boolean additionalPorts;
 
-	@Value("${server.user-port:}")
+	@Value("${fi.istech.ekahau.user-port:}")
 	private Integer userPort;
 
-	@Value("${server.book-port:}")
+	@Value("${fi.istech.ekahau.book-port:}")
 	private Integer bookPort;
 
 	@Bean
