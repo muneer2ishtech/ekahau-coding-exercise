@@ -10,9 +10,16 @@
 
 
 
-## 
-
 # APIs
+
+|----|---------------|----|---------------------------------------|
+|Auth|Signin         |POST|localhost:8080/api/auth/signin         |
+|Auth|Signup         |POST|localhost:8080/api/auth/signup         |
+|Auth|Update Password|PUT |localhost:8080/api/auth/update-password|
+|----|---------------|----|---------------------------------------|
+
+
+# API Details 
 
 ## APIs for Auth
  
