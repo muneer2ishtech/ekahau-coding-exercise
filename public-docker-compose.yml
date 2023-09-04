@@ -19,5 +19,6 @@ services:
        - 8080:8080
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://ekahau_coding_exercise_postgres:5432/ekdb
+      - FI_ISTECH_EKAHAU_ADDITIONAL-PORTS=false
     depends_on:
       - postgres-db
