@@ -12,11 +12,23 @@
 
 # APIs
 
-|----|---------------|----|---------------------------------------|
-|Auth|Signin         |POST|localhost:8080/api/auth/signin         |
-|Auth|Signup         |POST|localhost:8080/api/auth/signup         |
-|Auth|Update Password|PUT |localhost:8080/api/auth/update-password|
-|----|---------------|----|---------------------------------------|
+|Module |API                 |HTTP   |URL                                     |
+|-------|--------------------|-------|----------------------------------------|
+|Auth   |Signin              |POST   |localhost:8080/api/auth/signin          |
+|Auth   |Signup              |POST   |localhost:8080/api/auth/signup          |
+|Auth   |Update Password     |PATCH  |localhost:8080/api/auth/update-password |
+|       |                    |       |                                        |
+|User   |Get User Details    |GET    |localhost:PORT/api/v1/users/{userId}    |
+|User   |Update User Details |PUT    |localhost:PORT/api/v1/users             |
+|       |                    |       |                                        |
+|Book   |Create Book         |POST   |localhost:PORT/api/v1/books             |
+|Book   |Get All Books       |GET    |localhost:PORT/api/v1/books             |
+|Book   |Update Book         |PUT    |localhost:PORT/api/v1/books             |
+|Book   |Get Book by ID      |GET    |localhost:PORT/api/v1/books/{bookId}    |
+|Book   |Delete Book By ID   |DELETE |localhost:PORT/api/v1/books/{bookId}    |
+|       |                    |       |                                        |
+|API Doc| OpenAPI            | GET   |http://localhost:8080/api-docs          |
+|API Doc| Swagger            | GET   |http://localhost:8080/swagger-ui.html   |
 
 
 # API Details 
