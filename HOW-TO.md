@@ -1,6 +1,3 @@
-## APIs
-See [APIs](API-URLs.md) on how to find APIs to use for application
-
 
 ## Build
 ### Maven build
@@ -81,3 +78,6 @@ docker compose -f public-docker-compose.yml up
 - To use additional ports for public docker image:
   - In `public-docker-compose.yml`, change `FI_ISTECH_EKAHAU_ADDITIONAL-PORTS` to `true`
 
+
+## APIs
+See [APIs](./README.md#APIs) on how to find APIs to use for application
