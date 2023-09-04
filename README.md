@@ -72,3 +72,8 @@ docker compose -f public-docker-compose.yml pull
 ```
 docker compose -f public-docker-compose.yml up
 ```
+
+### To Run with additional port for image pulled from Docker Hub
+- To use additional ports for public docker image:
+  - In `public-docker-compose.yml`, change `FI_ISTECH_EKAHAU_ADDITIONAL-PORTS` to `true`
+
