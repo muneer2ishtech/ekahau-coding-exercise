@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.util.StringUtils;
+import org.springframework.util.Assert;
 
 @SpringBootApplication
 public class CodingExerciseApplication {
@@ -19,8 +19,14 @@ public class CodingExerciseApplication {
 		SpringApplication.run(CodingExerciseApplication.class, args);
 	}
 
-	@Value("${server.additionalPorts:}")
-	String additionalPorts;
+	@Value("${server.additional-ports:false}")
+	private boolean additionalPorts;
+
+	@Value("${server.user-port:}")
+	private Integer userPort;
+
+	@Value("${server.book-port:}")
+	private Integer bookPort;
 
 	@Bean
 	ServletWebServerFactory servletContainer() {
@@ -35,22 +41,26 @@ public class CodingExerciseApplication {
 	}
 
 	private Connector[] additionalConnectors() {
-		if (!StringUtils.hasLength(this.additionalPorts)) {
+		if (this.additionalPorts) {
+			Assert.state(this.userPort != null, "Port for '**/users/**' canot be null");
+			Assert.state(this.bookPort != null, "Port for '**/books/**' canot be null");
+		} else {
 			return null;
 		}
 
-		String[] ports = this.additionalPorts.split(",");
+		List<Connector> connectors = new ArrayList<>();
 
-		List<Connector> result = new ArrayList<>();
+		Connector connector1 = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+		connector1.setScheme("http");
+		connector1.setPort(this.userPort);
+		connectors.add(connector1);
+		
+		Connector connector2 = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+		connector2.setScheme("http");
+		connector2.setPort(this.bookPort);
+		connectors.add(connector2);
 
-		for (String port : ports) {
-			Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-			connector.setScheme("http");
-			connector.setPort(Integer.valueOf(port));
-			result.add(connector);
-		}
-
-		return result.toArray(new Connector[] {});
+		return connectors.toArray(new Connector[] {});
 	}
 
 }
