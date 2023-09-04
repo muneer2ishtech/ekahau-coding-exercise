@@ -23,7 +23,7 @@ public class CodingExerciseApplication {
 	String additionalPorts;
 
 	@Bean
-	public ServletWebServerFactory servletContainer() {
+	ServletWebServerFactory servletContainer() {
 		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
 
 		Connector[] additionalConnectors = additionalConnectors();
